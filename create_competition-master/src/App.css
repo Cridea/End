@@ -1,0 +1,96 @@
+  .br {
+    float: left;
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+  .elementsComp{
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+  .table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-radius: 10px;
+    border-spacing: 0;
+    text-align: center;
+  }
+  .textInput{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    padding-bottom: 40px;
+  }
+  .th {
+    background: #008B8B;
+    color: white;
+    text-shadow: 0 1px 1px #2D2020;
+    padding: 10px 20px;
+  }
+  .th, .tr, .td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+  }
+  .th:first-child, .td:first-child {
+    text-align: left;
+  }
+  .th:first-child {
+    border-top-left-radius: 10px;
+  }
+  .th:last-child {
+    border-top-right-radius: 10px;
+    border-right: none;
+  }
+  .td {
+    padding: 10px 20px;
+    background: #20B2AA;
+  }
+  .tr:last-child .td:first-child {
+    border-radius: 0 0 0 10px;
+  }
+  .tr:last-child .td:last-child {
+    border-radius: 0 0 10px 0;
+  }
+  .tr .td:last-child {
+    border-right: none;
+  }
+  .button{
+    background-color:#FF6347;
+    padding: 5px 25px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    text-shadow: 0 1px 1px #2D2020;
+  }
+  .buttonPosition{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .align{
+    align-self: flex-start;
+  }
+ .header{
+   background: #287880;
+   color: white;
+   text-shadow: 0 1px 1px #2D2020;
+   justify-content: center;
+   padding-left: 5%;
+   padding-right: 5%;
+   position: relative;
+ }
+ .body{
+   background: #b0f0e6 no-repeat center top;
+   padding: 0;
+   margin: 0;
+   background-repeat: repeat;
+   background-attachment: scrol;
+   width: auto;
+ }
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
