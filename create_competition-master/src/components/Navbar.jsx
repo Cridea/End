@@ -10,7 +10,7 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="container">
-            <Link className="navbar-brand" to="/">React Website</Link>
+            <Link className="navbar-brand" to="/">Enduro</Link>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ml-auto">
                  <li className="nav-item active">
