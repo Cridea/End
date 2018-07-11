@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 //import { render } from "react-dom";
-import { makeData, Logo, Tips } from "../Utils";
+import { makeData, Logo } from "../tables/UsersTable";
 import ReactTable from "react-table";
 import "react-table/react-table.css";  
 class Users extends Component {
@@ -14,13 +14,14 @@ class Users extends Component {
     render() {
       const { data } = this.state;
       return (
-        <Navbar>
+        <div>
+        <Navbar/>
                  <div className="container">
                  <ReactTable
           data={data}
           columns={[
             {
-              Header: "Name",
+              Header: "Пользователь №",
               columns: [
                 {
                   Header: "First Name",
@@ -34,7 +35,7 @@ class Users extends Component {
               ]
             },
             {
-              Header: "Info",
+              Header: "ФИО",
               columns: [
                 {
                   Header: "Age",
@@ -47,11 +48,20 @@ class Users extends Component {
               ]
             },
             {
-              Header: 'Stats',
+              Header: 'Логин',
               columns: [
                 {
                   Header: "Visits",
                   accessor: "visits"
+                }
+              ]
+            },
+            {
+              Header: 'Роль',
+              columns: [
+                {
+                  //Header: "Visits",
+                  accessor: "роль"
                 }
               ]
             }
@@ -60,11 +70,12 @@ class Users extends Component {
           className="-striped -highlight"
         />
         <br />
-        <Tips />
+    
         <Logo />
                 
             </div>
-            </Navbar>
+            </div>
+     
             );
         }
       }
