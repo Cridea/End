@@ -1,35 +1,92 @@
 import React, {Component} from 'react';
-
+import {Link } from 'react-router-dom';
 class CreateComp extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        name: '',
+        description: '',
+        dateStart: '',
+        dateFinish: '',
+        visible: false
+    }
+}
+
+handleSubmit = (e) => {
+console.log(this.state);
+    fetch('https://afternoon-woodland-86438.herokuapp.com/competitions/create', {
+      method: 'POST',
+      headers: {
+        // 'Access-Control-Allow-Headers': 'origin, content-type, accept',
+        // 'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        description: this.state.description,
+        dateTimeStart: this.state.dateStart,
+        dateTimeFinish: this.state.dateFinish,
+        visible: this.state.visible})
+    }).then(res=>res.json())
+      .then(res => console.log(res));
+e.preventDefault();
+}
+
+updateName(e) {
+  this.setState({
+        name: e.target.value ? e.target.value : ''
+  })
+}
+
+updateDateStart(e) {
+  this.setState({
+        dateStart: e.target.value ? e.target.value : ''
+  })
+}
+
+updateDateFinish(e) {
+  this.setState({
+        dateFinish: e.target.value ? e.target.value : ''
+  })
+}
+
+updateDescription(e) {
+  this.setState({
+        description: e.target.value ? e.target.value : ''
+  })
+}
+
+updateVisible(e) {
+if (e.target.value === '1') {
+  this.setState({
+    visible: true
+  })
+}
+else {this.setState({visible: false})}
+}
     render() {
 
         return (
             <div>
             <div className="container">
-              <h2>About</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat orci eu nulla sagittis, pulvinar
-                dignissim lectus consequat. Etiam in lobortis ligula, vitae ornare lacus. Vivamus scelerisque lorem arcu,
-                vitae eleifend ex commodo a. Quisque rutrum, augue sit amet egestas efficitur, magna nulla lacinia elit,
-                sed suscipit tortor erat vitae enim. Donec egestas odio id aliquet rhoncus. Vestibulum ante ipsum primis
-                in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque mi dolor, egestas nec lacinia non,
-                sodales eu lacus. Donec ultricies nec elit ac ornare. Quisque fermentum ligula ut feugiat cursus. Aliquam
-                auctor suscipit ex a lacinia. Mauris sollicitudin, justo quis fringilla finibus, dui diam ullamcorper
-                nulla, sit amet placerat justo neque quis quam. Praesent nec nibh at tortor ornare dignissim. Morbi
-                tincidunt fringilla turpis at luctus. Vivamus dapibus ligula eget pellentesque luctus. Maecenas ut
-                consectetur lacus, non dignissim nisi. Praesent sodales tellus sit amet faucibus tempus.
-              </p>
-              <p>
-                Maecenas dapibus, est posuere eleifend rutrum, lectus ligula gravida urna, at pretium dui turpis non
-                lorem. Donec pretium lorem ipsum, at fermentum nibh consequat facilisis. Sed maximus massa est, vel porta
-                diam placerat id. Vivamus imperdiet lorem eget dolor bibendum, eget gravida tellus interdum. Sed lectus
-                odio, condimentum eu porttitor vel, euismod sit amet urna. Nam quis dui a nibh rhoncus aliquam vitae in
-                metus. Nam sit amet semper turpis. Suspendisse eu malesuada tortor, vel lacinia nisl. Phasellus ultrices
-                vehicula magna, sed tempor neque dapibus quis. Phasellus urna justo, sollicitudin ac odio eget, convallis
-                varius nulla. Vivamus in lacinia lorem, at eleifend nulla. Nulla nec luctus purus. Integer id purus
-                mauris. Phasellus finibus ultricies erat a tempus. Nulla luctus sem nec justo venenatis, eu faucibus purus
-                congue.
-              </p>
+              <h2 align="center">Создание соревнования</h2>
+            <form align="center" onSubmit={this.handleSubmit}>
+                <label className="textInput">
+                  <p>  Название
+                    <input  value={this.state.name} onChange={e => this.updateName(e)} /></p>
+                  <p>  Описание
+                    <input value={this.state.description} onChange={e => this.updateDescription(e)} /></p>
+                  <p>  Дата начала
+                    <input value={this.state.dateStart} onChange={e => this.updateDateStart(e)} /></p>
+                  <p>  Дата окончания
+                    <input value={this.state.dateFinish} onChange={e => this.updateDateFinish(e)} /></p>
+                  <p>  Visible
+                    <input value={this.state.visible} onChange={e => this.updateVisible(e)} /></p>
+                    
+                </label>
+                <p> <button align="center" type="submit" className="button"><Link to="/cardOfComp">Создать</Link></button></p>
+            </form>
             </div>
           </div>
         );

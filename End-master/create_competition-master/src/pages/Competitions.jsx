@@ -16,7 +16,7 @@ class Competitions extends Component {
       <div>
         <Navbar/>
         <Switch>
-          <button className="button buttonPosition absolute"><Link to="/CreateComp">Создать соревнование</Link></button>
+          <button className="button buttonPosition absolute"><Link to="/createComp">Создать соревнование</Link></button>
         </Switch>
         <CompTable/>
       </div>
