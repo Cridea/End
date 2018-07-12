@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';//нужна пустая строка. логически отделяяй
 class CreateComp extends Component {
   constructor(props){
     super(props);
@@ -11,7 +11,7 @@ class CreateComp extends Component {
         visible: false
     }
 }
-
+//отступы у методов 2-4 пробела (см. constuctor/render)
 handleSubmit = (e) => {
 console.log(this.state);
     fetch('https://afternoon-woodland-86438.herokuapp.com/competitions/create', {
@@ -63,16 +63,16 @@ if (e.target.value === '1') {
     visible: true
   })
 }
-else {this.setState({visible: false})}
+else {this.setState({visible: false})} // блок else с новой строки, с фигурными скобками
 }
     render() {
-
+      //убрать пустую строку
         return (
-            <div>
-            <div className="container">
+            <div> //зачем этот div, если есть ниже, который охватывает весь блок
+            <div className="container"> //---------------------------------
               <h2 align="center">Создание соревнования</h2>
             <form align="center" onSubmit={this.handleSubmit}>
-                <label className="textInput">
+                <label className="textInput"> //почитай нужен ли label или нет
                   <p>  Название
                     <input  value={this.state.name} onChange={e => this.updateName(e)} /></p>
                   <p>  Описание
@@ -83,15 +83,16 @@ else {this.setState({visible: false})}
                     <input value={this.state.dateFinish} onChange={e => this.updateDateFinish(e)} /></p>
                   <p>  Visible
                     <input value={this.state.visible} onChange={e => this.updateVisible(e)} /></p>
-                    
-                </label>
+                    //убрать отступ
+                </label> 
+              //p используется только для текста. Для того чтобы присвоить стиль чему-либо используй div
                 <p> <button align="center" type="submit" className="button"><Link to="/cardOfComp">Создать</Link></button></p>
             </form>
-            </div>
-          </div>
+            </div> //------------------------------------------------
+          </div> //зачем этот div, если есть выше, который охватывает весь блок
         );
     }
-
+//пустая строка
 }
-
+//ещё раз проверить все отступы и логические пустые строки
 export default CreateComp
