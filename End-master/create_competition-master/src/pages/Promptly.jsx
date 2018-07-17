@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import Navbar from '../components/Navbar';
 
 class Promptly extends Component {
   render() {
     return (
         <div className="container1">
-          <Navbar/>
           <h2>Promptly</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat orci eu nulla sagittis, pulvinar

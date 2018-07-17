@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
 //import { render } from "react-dom";
 import { makeData, Logo } from "../tables/UsersTable";
 import ReactTable from "react-table";
-import "react-table/react-table.css";  
+import "react-table/react-table.css";
 class Users extends Component {
   constructor() {
     super();
@@ -15,7 +14,6 @@ class Users extends Component {
       const { data } = this.state;
       return (
         <div>
-        <Navbar/>
                  <div className="container">
                  <ReactTable
           data={data}
@@ -70,14 +68,14 @@ class Users extends Component {
           className="-striped -highlight"
         />
         <br />
-    
+
         <Logo />
-                
+
             </div>
             </div>
-     
+
             );
         }
       }
-      
+
       export default Users

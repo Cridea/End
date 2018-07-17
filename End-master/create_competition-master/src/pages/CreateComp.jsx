@@ -1,97 +1,115 @@
-import React, {Component} from 'react';
-import {Link } from 'react-router-dom';
-class CreateComp extends Component {
-  constructor(props){
+import React from 'react';
+
+class CreateComp extends React.Component {
+
+  constructor(props) {
     super(props);
     this.state = {
-        name: '',
-        description: '',
-        dateStart: '',
-        dateFinish: '',
-        visible: false
+      name: '',
+      description: '',
+      dateStart: '',
+      dateFinish: '',
+      visible: false,
+      submitButtonDisabled: true  //т.к. поля пустые
     }
-}
+  }
 
-handleSubmit = (e) => {
-console.log(this.state);
+  handleSubmit = (e) => {
+    console.log(this.state);
     fetch('https://afternoon-woodland-86438.herokuapp.com/competitions/create', {
       method: 'POST',
       headers: {
-        // 'Access-Control-Allow-Headers': 'origin, content-type, accept',
-        // 'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'origin, content-type, accept',
+        'Access-Control-Allow-Origin': '*',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: this.state.name,
         description: this.state.description,
-        dateTimeStart: this.state.dateStart,
-        dateTimeFinish: this.state.dateFinish,
+        dateStart : this.state.dateStart,
+        dateFinish: this.state.dateFinish,
         visible: this.state.visible})
-    }).then(res=>res.json())
-      .then(res => console.log(res));
-e.preventDefault();
-}
+    }).then(res=>{
+      console.log(res);
+      this.setState({name: '', description: '', dateStart: '', dateFinish: ''});
+      console.log(this.state);
+      this.checkFieldsEmpty();
+      res.ok ? console.log('success') : console.warn('something gone wrong');
+    });
+    e.preventDefault();
+  };
 
-updateName(e) {
-  this.setState({
-        name: e.target.value ? e.target.value : ''
-  })
-}
+  updateName(e) {
+    this.checkFieldsEmpty() //можно проверять здесь
+    this.setState( {name: e.target.value} );
+  }
 
-updateDateStart(e) {
-  this.setState({
-        dateStart: e.target.value ? e.target.value : ''
-  })
-}
+  updateDateStart(e) {
+    this.checkFieldsEmpty()
+    this.setState( {dateStart: e.target.value} )
+  }
 
-updateDateFinish(e) {
-  this.setState({
-        dateFinish: e.target.value ? e.target.value : ''
-  })
-}
+  updateDateFinish(e) {
+    this.checkFieldsEmpty()
+    this.setState( {dateFinish: e.target.value} )
+  }
 
-updateDescription(e) {
-  this.setState({
-        description: e.target.value ? e.target.value : ''
-  })
-}
+  updateDescription(e) {
+    this.checkFieldsEmpty()
+    this.setState( {description: e.target.value} )
+  }
 
-updateVisible(e) {
-if (e.target.value === '1') {
-  this.setState({
-    visible: true
-  })
-}
-else {this.setState({visible: false})}
-}
-    render() {
-
-        return (
-            <div>
-            <div className="container">
-              <h2 align="center">Создание соревнования</h2>
-            <form align="center" onSubmit={this.handleSubmit}>
-                <label className="textInput">
-                  <p>  Название
-                    <input  value={this.state.name} onChange={e => this.updateName(e)} /></p>
-                  <p>  Описание
-                    <input value={this.state.description} onChange={e => this.updateDescription(e)} /></p>
-                  <p>  Дата начала
-                    <input value={this.state.dateStart} onChange={e => this.updateDateStart(e)} /></p>
-                  <p>  Дата окончания
-                    <input value={this.state.dateFinish} onChange={e => this.updateDateFinish(e)} /></p>
-                  <p>  Visible
-                    <input value={this.state.visible} onChange={e => this.updateVisible(e)} /></p>
-                    
-                </label>
-                <p> <button align="center" type="submit" className="button"><Link to="/cardOfComp">Создать</Link></button></p>
-            </form>
-            </div>
-          </div>
-        );
+  updateVisible(e) {
+    if (e.target.value === '1') {
+      this.setState({visible: true})
     }
+    else {
+      this.setState({visible: false})
+    }
+  }
 
+  checkFieldsEmpty = () => {
+    if ((this.state.name.length&&this.state.description.length&&this.state.dateStart.length&&this.state.dateFinish.length) === 0) {
+      this.setState({submitButtonDisabled: true});
+    } else {
+      this.setState({submitButtonDisabled: false});
+    }
+    console.log(this.state.submitButtonDisabled);
+  };
+
+  render() {
+    return (
+        <div className="createComp width_input">
+          <form onSubmit={this.handleSubmit} className='centerInput textInput'>
+            <div className='textInput'>
+              <p>Create competition:</p>
+              <p>Название</p>
+              <p><input id='inputName'
+                      value={this.state.name}
+                      onChange={e => this.updateName(e)}/></p>
+              <p>Описание</p>
+              <p><input id='inputDescription'
+                      value={this.state.description}
+                      onChange={e => this.updateDescription(e)}/></p>
+              <p>Дата начала</p>
+              <p><input id='inputDateStart'
+                      value={this.state.dateStart}
+                      onChange={e => this.updateDateStart(e)}/></p>
+              <p>Дата окончания</p>
+              <p><input id='inputDateFinish'
+                      value={this.state.dateFinish}
+                      onChange={e => this.updateDateFinish(e)}/></p>
+              <p>Visible</p>
+              <p><input id='inputVisible'
+                      value={this.state.visible}
+                      onChange={e => this.updateVisible(e)}/></p>
+              <button className="button" onClick={() => this.goToState('/cardOfComp')}>Создать</button>
+            </div>
+          </form>
+        </div>
+    )
+  }
 }
 
-export default CreateComp
+export default CreateComp;

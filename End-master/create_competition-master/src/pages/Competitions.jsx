@@ -1,27 +1,26 @@
-import React, {Component} from 'react';
-import Navbar from '../components/Navbar';
+import React from 'react';
 import CompTable from "../tables/CompTable";
 //import ReactTable from "react-table";
-import "react-table/react-table.css"; 
-import {Link, Switch } from 'react-router-dom';
+import "react-table/react-table.css";
+import {Redirect } from 'react-router-dom';
+import BaseComponent from '../components/baseComponent';
 
-class Competitions extends Component {
-
-
- 
+class Competitions extends BaseComponent {
+ // constructor(props) {
+   // super(props);
+ // }
 
   render() {
-
+        if (this.reload) {
+            this.reload = false;
+            return <Redirect to={this.redirect} push={true} />;
+        }
     return (
       <div>
-        <Navbar/>
-        <Switch>
-          <button className="button buttonPosition absolute"><Link to="/createComp">Создать соревнование</Link></button>
-        </Switch>
+          <button className="button buttonPosition absolute" onClick={() => this.goToState('/createComp')}>Создать соревнование</button>
         <CompTable/>
       </div>
-   
-        );
+    );
   }
 }
 

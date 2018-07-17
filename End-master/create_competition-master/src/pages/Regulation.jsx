@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import Navbar from '../components/Navbar';
 
 class Regulation extends Component {
   render() {
     return (
         <div>
-          <Navbar/>
           <div className="container2">
             <h2>About</h2>
             <p>
